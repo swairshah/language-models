@@ -27,7 +27,7 @@ class NGramDataset(Dataset):
         label_idx = self.word_to_idx[self.data[idx+self.context_size]]
         return context_idx, label_idx
 
-
+# %%
 if __name__ == "__main__":
     context_size = 5
 
