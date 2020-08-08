@@ -1,8 +1,11 @@
+
 from utils import *
 from ProbabilisticLM import UnigramSampler, BigramSampler
+from gensim.models import Word2Vec
 
-lines = parse_lines("data/sherlock.txt")
+lines = parse_lines("data/shakespeare.txt")
 words = [word for line in lines for word in line] 
+
 
 # %%
 
@@ -26,14 +29,21 @@ def get_ngrams(word_list):
 
 unigrams, bigrams, trigrams = get_ngrams(words)
 
-# %%
-
-filtered = {i:j for i,j in trigrams.items() if j >= 3}
+#filtered = {i:j for i,j in trigrams.items() if j >= 3}
 
 # %%
 
 unigramLM = UnigramSampler(unigrams)
+bigramLM = BigramSampler(bigrams)
 
 # %%
 
+unigramLM.generate(10)
+bigramLM.generate(10, context="brutus")
+
+# %%
+list_list_words= parse_lines('data/shakespeare.txt')
+
+model = Word2Vec(list_list_words, size=300, window=5, min_count=2, workers=16)
+model.wv.save_word2vec_format("shakespeare_w2v.txt", binary=False)
 
