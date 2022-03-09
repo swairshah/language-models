@@ -44,6 +44,6 @@ bigramLM.generate(10, context="brutus")
 # %%
 list_list_words= parse_lines('data/shakespeare.txt')
 
-model = Word2Vec(list_list_words, size=300, window=5, min_count=2, workers=16)
+model = Word2Vec(list_list_words, vector_size=300, window=5, min_count=2, workers=16)
 model.wv.save_word2vec_format("shakespeare_w2v.txt", binary=False)
 

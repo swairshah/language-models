@@ -22,9 +22,9 @@ CONTEXT_SIZE = 5
 
 list_list_words= parse_lines('data/shakespeare.txt')
 
-model = Word2Vec(list_list_words, size=EMBEDDING_DIM, window=CONTEXT_SIZE, min_count=2, workers=16)
+model = Word2Vec(list_list_words, vector_size=EMBEDDING_DIM, window=CONTEXT_SIZE, min_count=2, workers=16)
 
-words = model.wv.index2word
+words = model.wv.index_to_key
 weights = torch.FloatTensor(model.wv.vectors)
 embedding = nn.Embedding.from_pretrained(weights)
 
